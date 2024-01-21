@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import EmailIcon from "@mui/icons-material/Email";
 
-function App() {
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wrap">
+      <div className="icon_area">
+        <TwitterIcon className="icon" />
+        <span className="icon_text">Twitter</span>
+      </div>
+      <hr />
+      <div className="icon_area">
+        <InstagramIcon className="icon" />
+        <span className="icon_text">Instagram</span>
+      </div>
+      <hr />
+      <div className="icon_area">
+        <EmailIcon className="icon" />
+        <span className="icon_text">メールアドレス</span>
+      </div>
+      <hr />
     </div>
   );
-}
-
-export default App;
+};
