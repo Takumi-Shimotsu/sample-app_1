@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { GridTile } from "./GridTile";
-import Chocolate from "../chocolate_item_star_df.json";
 import HomeIcon from "@mui/icons-material/Search";
 import SearchIcon from "@mui/icons-material/Search";
 import React, { useEffect } from "react";

@@ -1,10 +1,16 @@
-import ChocolateKuchikomi from "../chocolate_item_kuchikomi_df_sample.json";
+import NewItemInfo from "../new_items_info.json";
+import NewItemKuchikomi from "../new_items_kuchikomi.json";
 import { useState } from "react";
 
 export function CreateTag(props) {
   const itemName = props.itemName;
-  const itemKuchikomi = ChocolateKuchikomi;
-  const antiSizzle = "しっとり,もちもち,プレミアム,甘い";
+  // 商品限定フィルター
+  const itemInfo = NewItemInfo.filter(
+    (item) =>
+      // 検索文字が含まれている商品に限
+      item.item_name === itemName
+  );
+  const antiSizzle = itemInfo[0].tag_word;
   const keywordsList = antiSizzle.split(",");
   const [clickedButtons, setClickedButtons] = useState([]);
 

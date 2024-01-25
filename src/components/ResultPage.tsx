@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Chocolate from "../chocolate_item_df_3000.json";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { CreateTable } from "./CreateTable";
@@ -7,11 +6,10 @@ import { CreateReviews } from "./CreateReviews";
 import { useState } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
+import NewItemInfo from "../new_items_info.json";
+import NewItemKuchikomi from "../new_items_kuchikomi.json";
 
 export function ResultPage() {
-  // 件数を制限
-  const chocolate = Chocolate.slice(0, 100);
-
   const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   const navigate = useNavigate();
@@ -23,13 +21,14 @@ export function ResultPage() {
   const params = useParams();
 
   // 商品限定フィルター
-  const itemInfo = chocolate.filter(
+  const itemInfo = NewItemInfo.filter(
     (item) =>
       // 検索文字が含まれている商品に限
       item.item_name === params.info
   );
+  console.log(itemInfo[0]);
 
-  const { item_name, total_value, item_info, url, image, ...values } =
+  const { item_name, total_value, item_info, url, image, tag_word, ...values } =
     itemInfo[0];
   const valuesSum =
     itemInfo[0]["★1"] +

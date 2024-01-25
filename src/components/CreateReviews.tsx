@@ -1,4 +1,5 @@
-import ChocolateKuchikomi from "../chocolate_item_kuchikomi_df_sample.json";
+import NewItemInfo from "../new_items_info.json";
+import NewItemKuchikomi from "../new_items_kuchikomi.json";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
@@ -7,13 +8,32 @@ import { useState, useEffect } from "react";
 
 export function CreateReviews(props) {
   const itemName = props.itemName;
-  const [itemKuchikomi, setItemKuchikomi] = useState(ChocolateKuchikomi);
-  const antiSizzle = "しっとり,もちもち,プレミアム,甘い";
+
+  // 商品限定フィルター
+  const itemInfo = NewItemInfo.filter(
+    (item) =>
+      // 検索文字が含まれている商品に限
+      item.item_name === itemName
+  );
+
+  // 商品限定フィルター
+  const newItemKuchikomi = NewItemKuchikomi.filter(
+    (item) =>
+      // 検索文字が含まれている商品に限
+      item.item_name === itemName
+  );
+
+  //console.log(newItemKuchikomi);
+
+  const [itemKuchikomi, setItemKuchikomi] = useState(newItemKuchikomi);
+
+  const antiSizzle = itemInfo[0].tag_word;
   const keywordsList = antiSizzle.split(",");
   const [clickedButtons, setClickedButtons] = useState([]);
   const initialStates = Object.fromEntries(
     keywordsList.map((key) => [key, false])
   );
+
   const [selectedButtons, setSelectedButtons] = useState(initialStates);
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -30,6 +50,7 @@ export function CreateReviews(props) {
       // ボタンがクリックされていない場合、追加
       setClickedButtons((prevButtons) => [...prevButtons, value]);
     }
+    console.log(clickedButtons);
 
     setSelectedButtons((prevSelectedButtons) => {
       const newSelectedButtons = { ...prevSelectedButtons };
@@ -40,26 +61,26 @@ export function CreateReviews(props) {
   };
 
   useEffect(() => {
-    const filteredList = ChocolateKuchikomi.filter((item) => {
-      const kuchikomiValue = item.kuchikomi;
+    const filteredList = itemKuchikomi.filter((item) => {
+      const kuchikomiValue = item["原形"];
       return clickedButtons.some((keyword) => kuchikomiValue.includes(keyword));
     });
-    console.log(clickedButtons);
+    console.log(filteredList);
 
     // フィルタリングされたリストをセット
     if (clickedButtons.length !== 0) {
       setItemKuchikomi(filteredList);
     } else {
-      setItemKuchikomi(ChocolateKuchikomi);
+      setItemKuchikomi(newItemKuchikomi);
     }
   }, [clickedButtons]); // clickedButtonsが変更されたときだけ実行される
 
   return (
     <>
       <div className="flex flex-col mb-24">
-        <div className="flex flex-col mb-4">
+        {/*<div className="flex flex-col mb-4">
           <div className="flex items-center mb-2">
-            <h2 className="text-md lg:text-lg font-bold">タグワード</h2>
+            <h2 className="text-lg lg:text-xl font-bold">タグワード</h2>
             <HelpIcon
               className="ml-1"
               onMouseEnter={() => setShowTooltip(true)}
@@ -70,7 +91,7 @@ export function CreateReviews(props) {
           {showTooltip && (
             <div className="bg-gray-50 text-black rounded p-2 mb-2">
               <LightbulbIcon />
-              <span className="">タグを押すと口コミが絞れる</span>
+              <span className="ml-1">タグを押すと口コミが絞れる</span>
             </div>
           )}
 
@@ -90,9 +111,9 @@ export function CreateReviews(props) {
               </button>
             ))}
           </div>
-        </div>
+        </div>*/}
 
-        <h2 className="text-md lg:text-lg font-bold my-2">クチコミ</h2>
+        <h2 className="text-lg lg:text-xl font-bold my-2">クチコミ</h2>
         {itemKuchikomi.map((item) => (
           <div className="bg-white p-4 my-2 py-2 rounded-2xl shadow-md">
             <p className="text-xl mb-1">⭐️ {item.star_value}</p>

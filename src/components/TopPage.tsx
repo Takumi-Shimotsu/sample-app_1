@@ -17,7 +17,11 @@ export function TopPage() {
   return (
     <>
       <div className="object-center">
-        <h1 className="text-5xl text-center mt-40">システム</h1>
+        <h1 className="text-5xl text-center mt-40">
+          口コミ
+          <br />
+          システム
+        </h1>
       </div>
       <div className="flex items-center justify-center h-screen">
         <button

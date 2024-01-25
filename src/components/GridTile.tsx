@@ -1,15 +1,28 @@
-import Chocolate from "../chocolate_item_df_3000.json";
+import NewItemInfo from "../new_items_info.json";
+import NewItemKuchikomi from "../new_items_kuchikomi.json";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 
 export function GridTile(props) {
-  // 件数を制限
-  const chocolate = Chocolate.slice(0, 100);
-
   const navigate = useNavigate();
 
+  // タイルをランダムに出す
+  /*const shuffleArray = (array) => {
+    const shuffled = [...array]; // 元の配列のコピーを作成
+
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; // 要素の入れ替え
+    }
+
+    return shuffled;
+  };*/
+
+  // シャッフルされた配列を取得
+  //const shuffledNewItemInfo = shuffleArray(NewItemInfo);
+
   // 商品限定フィルター
-  const searchWord = chocolate.filter((item) =>
+  const searchWord = NewItemInfo.filter((item) =>
     // 検索文字が含まれている商品に限定
     // item.item_name.includes(props.word)
     {

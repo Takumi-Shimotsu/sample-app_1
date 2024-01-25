@@ -4,6 +4,7 @@
 
 body {
   @apply bg-lime-50;
+  @apply text-gray-800;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "ヒラギノ角ゴ ProN",
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
